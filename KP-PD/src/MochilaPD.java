@@ -71,8 +71,8 @@ public class MochilaPD {
 	}*/
 	
 	public static void imprimirMatriz(int[][] matriz) {
-		for (int x=0; x < matriz.length; x++){
-	        for (int y=0; y < matriz[x].length; y++)
+		for (int x=1; x < matriz.length; x++){
+	        for (int y=1; y < matriz[x].length; y++)
 	              System.out.print(" | " + matriz[x][y]+ " | ");   
 	        System.out.println("\n----------------------------------------");
 
@@ -114,8 +114,8 @@ public class MochilaPD {
 	
 	public static void exportarResultados(String nombre, int[][] matriz) throws IOException {
 		PrintWriter pw= new PrintWriter(new FileWriter(nombre, true));
-		for (int x=0; x < matriz.length; x++){
-	        for (int y=0; y < matriz[x].length; y++)
+		for (int x=1; x < matriz.length; x++){
+	        for (int y=1; y < matriz[x].length; y++)
 	              pw.print(" | " + matriz[x][y]+ " | ");   
 	        pw.println("\n----------------------------------------");
 		}
