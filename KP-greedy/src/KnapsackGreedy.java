@@ -1,12 +1,26 @@
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.StringTokenizer;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class KnapsackGreedy {
 	
 	private double peso;
 	private double valor;
 	private double costo;
+	private static int elementos=0;
+	private static double capMax;
+	private static double valorFinal = 0;
 	
+	static int[] pesos;
+	static int[] valores;
 	
 	public KnapsackGreedy(double peso, double valor) {
 		this.peso = peso;
@@ -49,7 +63,7 @@ public class KnapsackGreedy {
 		
 		
 		int capRestante = capMax;
-		double valorFinal = 0;
+		
 		
 		int i = 0;
 		boolean continuar = true;
@@ -74,6 +88,44 @@ public class KnapsackGreedy {
 			}
 		}
 		System.out.println("Valor maximo --> "+ valorFinal);
+	}
+	
+	public  void lecturaArchivo(String archivo) throws IOException, FileNotFoundException {
+		try {
+			BufferedReader lectura = new BufferedReader(new FileReader(archivo));
+			String linea= lectura.readLine();
+			elementos=Integer.parseInt(linea);
+			linea=lectura.readLine();
+			capMax=Integer.parseInt(linea);
+			int cont=1;
+			pesos= new int[elementos+1];
+			valores= new int[elementos+1];	
+			pesos[0]=0;
+			valores[0]=0;
+			StringTokenizer st;
+			while((linea=lectura.readLine())!=null) {
+				st=new StringTokenizer(linea);
+				valores[cont]=Integer.parseInt(st.nextToken());
+				pesos[cont]=Integer.parseInt(st.nextToken());
+				cont++;
+			}	
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("No se encontro el archivo");
+		} catch (IOException e) {
+			System.out.println("Hubo un problema de IO");
+		}
+	}
+	
+	public void exportarResultados(String nombre, int[][] matriz) throws IOException {
+		PrintWriter pw= new PrintWriter(new FileWriter(nombre, true));
+		for (int x=1; x < matriz.length; x++){
+	        for (int y=1; y < matriz[x].length; y++)
+	              pw.print(" | " + matriz[x][y]+ " | ");   
+	        pw.println("\n----------------------------------------");
+		}
+		pw.println("Resultado es: "+ String.valueOf(valorFinal));
+		pw.close();
 	}
 	
 	
