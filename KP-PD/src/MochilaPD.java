@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.StringTokenizer;
+
 
 public class MochilaPD {
 	
@@ -19,6 +21,7 @@ public class MochilaPD {
 	//int[] valores= {0,3,4,5,6};
 	static int[] pesoElementos;
 	static int[] valores;
+	static int[][] matriz;
 	
 	public static int[][] algoritmo(int elementos, int[] valores, int[] pesoElementos, int pesoMax) {
 		int matriz[][]=new int[elementos+1][pesoMax+1];
@@ -79,30 +82,24 @@ public class MochilaPD {
 		}
 	}
 	
-	public static void lecturaArchivo(FileReader archivo) throws IOException, FileNotFoundException {
+	public static void lecturaArchivo(String archivo) throws IOException, FileNotFoundException {
 		try {
-			int contador=1;
-			int contador2=1;
-			BufferedReader b = new BufferedReader(archivo);
-			String linea = b.readLine();
-			elementos=Integer.parseInt(linea.substring(0));
-			valores=new int[elementos+1];
-			pesoElementos=new int[elementos+1];
-			valores[0]=0;
+			BufferedReader lectura = new BufferedReader(new FileReader(archivo));
+			String linea= lectura.readLine();
+			elementos=Integer.parseInt(linea);
+			linea=lectura.readLine();
+			pesoMax=Integer.parseInt(linea);
+			int cont=1;
+			pesoElementos= new int[elementos+1];
+			valores= new int[elementos+1];	
 			pesoElementos[0]=0;
-			while((linea = b.readLine())!=null) {
-				if(linea.substring(0,1).equals("v")) {
-					valores[contador]=Integer.parseInt(linea.substring(1));
-					//System.out.println("valor"+valores[contador]);
-					contador++;
-				}
-				else if(linea.substring(0,1).equals("p")) {
-					pesoElementos[contador2]=Integer.parseInt(linea.substring(1));
-					contador2++;
-				}
-				else if(linea.substring(0,1).equals("m")) {
-					pesoMax=Integer.parseInt(linea.substring(1));
-				}
+			valores[0]=0;
+			StringTokenizer st;
+			while((linea=lectura.readLine())!=null) {
+				st=new StringTokenizer(linea);
+				valores[cont]=Integer.parseInt(st.nextToken());
+				pesoElementos[cont]=Integer.parseInt(st.nextToken());
+				cont++;
 			}	
 			
 		} catch (FileNotFoundException e) {
@@ -140,8 +137,10 @@ public class MochilaPD {
 				String nArchivo=scanner.next(); 
 				File archivo = new File(nArchivo);
 				FileReader archivo1 = new FileReader(archivo);
-				lecturaArchivo(archivo1);
-				matriz=algoritmo(elementos, valores, pesoElementos, pesoMax); 
+				lecturaArchivo(nArchivo);
+				Stopwatch timer = new Stopwatch();
+				matriz=algoritmo(elementos, valores, pesoElementos, pesoMax);
+				System.out.println("tiempo:"+timer.elapsedTime());
 				imprimirMatriz(matriz);
 				System.out.println(resultado(matriz, elementos, pesoMax));
 				break;
