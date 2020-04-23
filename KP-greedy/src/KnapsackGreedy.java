@@ -31,12 +31,13 @@ public class KnapsackGreedy {
 	
 	
 	public static void knapsackGreAl(int pesos[], int valores[], int capMax, int n) {
+		//inicializa cada item con su respectivo valor y peso
 		KnapsackGreedy[] items = new KnapsackGreedy[n];
-		
 		for(int i = 0; i < n; i++) {
 			items[i] = new KnapsackGreedy(pesos[i], valores[i]);
 		}
 		
+		//ordena el arreglo de items de forma descediente segun su costo
 		Arrays.sort(items, new Comparator<KnapsackGreedy>() {
 
 			@Override
@@ -45,6 +46,8 @@ public class KnapsackGreedy {
 				return itemB.getCosto().compareTo(itemA.getCosto());
 			}
 		});
+		
+		
 		int capRestante = capMax;
 		double valorFinal = 0;
 		
@@ -52,6 +55,7 @@ public class KnapsackGreedy {
 		boolean continuar = true;
 		
 		while(continuar) {
+			//agrega items a la mochila mientras exista espacio
 			if(items[i].getPeso() <= capRestante) {
 				capRestante -= items[i].getPeso();
 				valorFinal += items[i].getValor();
@@ -59,10 +63,12 @@ public class KnapsackGreedy {
 						+ " -> Valor: " + items[i].getValor());
 			}
 			
+			//si el item no se puede agregar, cambia al siguiente item
 			if(items[i].getPeso() > capRestante) {
 				i++;
 			}
 			
+			//detiene busqueda cuando todos fueron probados
 			if(i == n) {
 				continuar = false;
 			}
