@@ -1,0 +1,4 @@
+Max beneficio
+83
+Objetos
+{30, 25, 2, 6,16};
