@@ -23,8 +23,8 @@ public class MochilaPD {
 	static int[] valores;
 	static int[][] matriz;
 	
-	public static int[][] algoritmo(int elementos, int[] valores, int[] pesoElementos, int pesoMax) {
-		int matriz[][]=new int[elementos+1][pesoMax+1];
+	public int[][] algoritmo(int elementos, int[] valores, int[] pesoElementos, int pesoMax) {
+		matriz=new int[elementos+1][pesoMax+1];
 		//Rellenar de cero la primera fila
 		for (int i = 0; i < matriz[0].length; i++) {
 			matriz[0][i]=0;
@@ -50,7 +50,7 @@ public class MochilaPD {
 		return matriz;
 	}
 	
-	public static int resultado(int[][] matriz, int elementos, int pesoMax) {
+	public  int resultado(int[][] matriz, int elementos, int pesoMax) {
 		return matriz[elementos][pesoMax];
 	}
 	
@@ -73,7 +73,7 @@ public class MochilaPD {
 		}
 	}*/
 	
-	public static void imprimirMatriz(int[][] matriz) {
+	public void imprimirMatriz(int[][] matriz) {
 		for (int x=1; x < matriz.length; x++){
 	        for (int y=1; y < matriz[x].length; y++)
 	              System.out.print(" | " + matriz[x][y]+ " | ");   
@@ -82,7 +82,7 @@ public class MochilaPD {
 		}
 	}
 	
-	public static void lecturaArchivo(String archivo) throws IOException, FileNotFoundException {
+	public  void lecturaArchivo(String archivo) throws IOException, FileNotFoundException {
 		try {
 			BufferedReader lectura = new BufferedReader(new FileReader(archivo));
 			String linea= lectura.readLine();
@@ -109,7 +109,7 @@ public class MochilaPD {
 		}
 	}
 	
-	public static void exportarResultados(String nombre, int[][] matriz) throws IOException {
+	public void exportarResultados(String nombre, int[][] matriz) throws IOException {
 		PrintWriter pw= new PrintWriter(new FileWriter(nombre, true));
 		for (int x=1; x < matriz.length; x++){
 	        for (int y=1; y < matriz[x].length; y++)
@@ -122,7 +122,8 @@ public class MochilaPD {
 
 	public static void main(String[] args) throws IOException, FileNotFoundException {
 		int opcion=1;
-		int [][] matriz=new int[0][0];
+		MochilaPD mochila=new MochilaPD();
+		//int [][] matriz=new int[0][0];
 		do {
 			System.out.println("SELECCIONA ALGUNA DE LAS OPCIONES: ");
 			System.out.println("INTRODUCE 1 PARA INGRESAR DATOS");
@@ -137,18 +138,18 @@ public class MochilaPD {
 				String nArchivo=scanner.next(); 
 				File archivo = new File(nArchivo);
 				FileReader archivo1 = new FileReader(archivo);
-				lecturaArchivo(nArchivo);
+				mochila.lecturaArchivo(nArchivo);
 				Stopwatch timer = new Stopwatch();
-				matriz=algoritmo(elementos, valores, pesoElementos, pesoMax);
+				matriz=mochila.algoritmo(elementos, valores, pesoElementos, pesoMax);
 				System.out.println("tiempo:"+timer.elapsedTime());
-				imprimirMatriz(matriz);
-				System.out.println(resultado(matriz, elementos, pesoMax));
+				mochila.imprimirMatriz(matriz);
+				System.out.println(mochila.resultado(matriz, elementos, pesoMax));
 				break;
 			case 2:
 				System.out.println("INGRESE EL NOMBRE DEL ARCHIVO JUNTO CON .TXT");
 				String eArchivo=scanner.next();
 				//FileReader archivo2 = new FileReader(eArchivo);
-				exportarResultados(eArchivo, matriz);
+				mochila.exportarResultados(eArchivo, matriz);
 				System.out.println("\nExportado");
 				break;
 			case 3:
