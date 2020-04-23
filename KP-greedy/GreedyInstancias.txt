@@ -1,0 +1,15 @@
+Capacidad 5
+valores
+2
+6
+16
+25
+30
+pesos
+2
+4
+10
+11
+15
+Cap máxima
+37  
