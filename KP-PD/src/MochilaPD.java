@@ -141,7 +141,7 @@ public class MochilaPD {
 				mochila.lecturaArchivo(nArchivo);
 				Stopwatch timer = new Stopwatch();
 				matriz=mochila.algoritmo(elementos, valores, pesoElementos, pesoMax);
-				System.out.println(mochila.resultado(matriz, elementos, pesoMax));
+				System.out.println("Mejor valor de la mochila: "+mochila.resultado(matriz, elementos, pesoMax));
 				System.out.println("tiempo:"+timer.elapsedTime());
 				//mochila.imprimirMatriz(matriz);
 				//System.out.println(mochila.resultado(matriz, elementos, pesoMax));
