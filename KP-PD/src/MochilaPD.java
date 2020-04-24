@@ -116,7 +116,7 @@ public class MochilaPD {
 	              pw.print(" | " + matriz[x][y]+ " | ");   
 	        pw.println("\n----------------------------------------");
 		}
-		pw.println("Resultado es: "+ String.valueOf(resultado(matriz, elementos, pesoMax)));
+		pw.println("Mejor valor de la mochila: "+ String.valueOf(resultado(matriz, elementos, pesoMax)));
 		pw.close();
 	}
 
@@ -126,8 +126,8 @@ public class MochilaPD {
 		//int [][] matriz=new int[0][0];
 		do {
 			System.out.println("SELECCIONA ALGUNA DE LAS OPCIONES: ");
-			System.out.println("INTRODUCE 1 PARA INGRESAR DATOS");
-			System.out.println("INTRODUCE 2 PARA EXPORTAR DATOS");
+			System.out.println("INTRODUCE 1 PARA INGRESAR DATOS DE 1 SOLO ARCHIVO");
+			System.out.println("INTRODUCE 2 PARA EXPORTAR DATOS DEL ARCHIVO LEEIDO");
 			System.out.println("INTRODUCE 3 PARA SALIR");
 			Scanner entrada=new Scanner(System.in);
 			Scanner scanner=new Scanner(System.in);
@@ -141,12 +141,13 @@ public class MochilaPD {
 				mochila.lecturaArchivo(nArchivo);
 				Stopwatch timer = new Stopwatch();
 				matriz=mochila.algoritmo(elementos, valores, pesoElementos, pesoMax);
-				System.out.println("tiempo:"+timer.elapsedTime());
-				mochila.imprimirMatriz(matriz);
 				System.out.println(mochila.resultado(matriz, elementos, pesoMax));
+				System.out.println("tiempo:"+timer.elapsedTime());
+				//mochila.imprimirMatriz(matriz);
+				//System.out.println(mochila.resultado(matriz, elementos, pesoMax));
 				break;
 			case 2:
-				System.out.println("INGRESE EL NOMBRE DEL ARCHIVO JUNTO CON .TXT");
+				System.out.println("INGRESE EL NOMBRE DEL ARCHIVO A EXPORTAR JUNTO CON .TXT");
 				String eArchivo=scanner.next();
 				//FileReader archivo2 = new FileReader(eArchivo);
 				mochila.exportarResultados(eArchivo, matriz);
