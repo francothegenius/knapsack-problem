@@ -131,11 +131,47 @@ public class KnapsackGreedy {
 	
 	public static void main(String[] args) {
 		
-		int pesos[] = new int[] {15, 10, 2, 4};
-		int valores[] = new int[] {30, 25, 2, 6};
-		int capMax = 37;
+		int pesos[] = new int[] {10,
+				20,
+				30,
+				40,
+				50,
+				60,
+				70,
+				80,
+				90,
+				100};
+		int valores[] = new int[] {5,
+				15,
+				25,
+				35,
+				45,
+				55,
+				65,
+				75,
+				85,
+				95};
+		int capMax = 987654321;
 		int n = pesos.length;
 		
+		Stopwatch timer = new Stopwatch();
+		
 		knapsackGreAl(pesos, valores, capMax, n);
+		System.out.println();
+		System.out.println("tiempo:"+timer.elapsedTime());
 	}
+}
+class Stopwatch {
+	
+	private final long start;
+	
+	public Stopwatch() {
+		this.start=System.currentTimeMillis();
+	}
+	
+	public double elapsedTime() {
+		long now=System.currentTimeMillis();
+		return (now-this.start)/1000.0;
+	}
+
 }
